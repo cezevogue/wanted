@@ -33,3 +33,5 @@ function debug($value)
         var_dump($value);
     }
 }
+
+require_once './config/sample.init.php';

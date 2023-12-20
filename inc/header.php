@@ -60,3 +60,19 @@ require_once './config/sample.init.php';
     </nav>
 
 <div class="container mt-3">
+    <?php
+  if (isset($_SESSION['messages']) && !empty($_SESSION['messages'])):
+      foreach ($_SESSION['messages'] as $type =>$messages):
+          foreach ($messages as $key=> $message):
+    ?>
+
+          <div class="text-center w-50 mx-auto alert alert-<?= $type; ?> mb-3">
+
+              <p><?=    $message; ?></p>
+          </div>
+
+
+    <?php
+          unset($_SESSION['messages'][$type][$key]);
+     endforeach; endforeach; endif;
+    ?>

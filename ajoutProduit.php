@@ -13,7 +13,8 @@ $categories=prepareAndExecute("SELECT * FROM category;")->fetchAll();
 // obligatoire
 if (!empty($_POST)){
 
-
+    // debug($_POST);
+   // die;
     //controle des erreurs, on s'assure que tout les champs aient été saisie.
     // $error a pour but de générer la condition finale de soumission de formulaire
 $error=0;
@@ -88,6 +89,30 @@ $error=0;
         // upload du fichier temporaire
         copy($_FILES['picture']['tmp_name'], 'assets/upload/'.$picture_bdd);
 
+        // on prepare le tableau associatif des marqueurs
+        $data=$_POST;
+        // on ajoute la valeur du marqueur manquant pour picture
+        $data['picture']=$picture_bdd;
+//        debug($data);
+//        die;
+
+        $success=prepareAndExecute("INSERT INTO product (title, price, description, id_category, picture) VALUES (:title, :price, :description,:id_category ,:picture);", $data);
+
+        if ($success)
+        {
+           $_SESSION['messages']['success'][]="Produit ajouté";
+//           debug($_SESSION);
+//           die;
+
+           header('location:./gestionProduit.php');
+           exit();
+
+
+        }else{
+            $_SESSION['messages']['danger'][]="Problème, veuillez réitérer l'ajout";
+//            header('location:./ajoutProduit.php');
+//            exit();
+        }
 
 
 

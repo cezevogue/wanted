@@ -18,6 +18,9 @@ const CONFIG = [
     ]
 ];
 
+// pour lancer la session
+session_start();
+
 
 
 define('BASE', '/PHP/wanted/');
