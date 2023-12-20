@@ -42,6 +42,9 @@ require_once './config/sample.init.php';
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="<?=    BASE.'categories.php'; ?>">Catégories</a></li>
+                            <li><a class="dropdown-item" href="<?=    BASE.'gestionProduit.php'; ?>">Gestion des produits</a></li>
+                            <li><a class="dropdown-item" href="<?=    BASE.'ajoutProduit.php'; ?>">Ajouter un produit</a></li>
+
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -55,3 +58,5 @@ require_once './config/sample.init.php';
             </div>
         </div>
     </nav>
+
+<div class="container mt-3">

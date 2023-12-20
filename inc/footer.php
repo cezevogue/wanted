@@ -1,3 +1,5 @@
+</div>
+
 <footer>
     Ici c'est le footer
 </footer>

@@ -31,13 +31,18 @@ function getDb()
  *
  * @return mixed
  */
-function prepareAndExecute($query, $values = null, $lastId = false)
+function prepareAndExecute($query, $values = [], $lastId = false)
 {
     // on se connecte à la BDD
     $pdo = getDb();
 
     // on prépare la requête
     $pdoStatement = $pdo->prepare($query);
+    foreach ($values as $index =>$value)
+    {
+        $values[$index]=htmlspecialchars(trim($value));
+
+    }
 
     // on exécute la requête
     // si l'exécution est ok on retourne le résultat
