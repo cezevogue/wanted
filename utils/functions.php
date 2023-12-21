@@ -34,4 +34,32 @@ function debug($value)
     }
 }
 
+function connect()
+{
+    if (isset($_SESSION['user'])){
+
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function admin()
+{
+    if (connect() && $_SESSION['user']['role']=='ROLE_ADMIN'){
+
+        return true;
+    }else{
+
+        return false;
+    }
+
+}
+
+
+
+
+
 require_once './config/sample.init.php';
+
+require_once './utils/cart.php';

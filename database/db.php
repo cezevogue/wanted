@@ -48,7 +48,7 @@ function prepareAndExecute($query, $values = [], $lastId = false)
     // si l'exécution est ok on retourne le résultat
     if ($pdoStatement->execute($values)) {
         // si lastId vaut true on retourne l'id du dernier élément inséré
-        if (true === $lastId) {
+        if ($lastId) {
             return $pdo->lastInsertId();
         }
 

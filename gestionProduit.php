@@ -8,6 +8,32 @@ $products=prepareAndExecute("SELECT p.*, c.title as category FROM product p INNE
 
 //ebug($products);
 
+if (!empty($_GET) && isset($_GET['a']) && $_GET['a']==='d' && isset($_GET['id']))
+{
+    $picture=prepareAndExecute("SELECT picture FROM product WHERE id=:id;", ['id'=>$_GET['id']])->fetch();
+//    debug($picture);
+//    die();
+    unlink('assets/upload/'.$picture['picture']);
+
+    $success=prepareAndExecute("DELETE FROM product WHERE id=:id;", ['id'=>$_GET['id']]);
+
+    if ($success)
+    {
+        $_SESSION['messages']['success'][]="Produit supprimé avec succès";
+        header('location:./gestionProduit.php');
+        exit();
+
+    }else{
+        $_SESSION['messages']['danger'][]="Une erreur s'est produite, merci de recommencer";
+        header('location:./gestionProduit.php');
+        exit();
+
+    }
+
+
+
+}
+
 
 
 
@@ -44,7 +70,7 @@ getPartial('header', $metadata);
         <td><img src="assets/upload/<?=    $product['picture']; ?>" width="90" alt=""></td>
         <td>
             <a href="<?=    BASE.'modificationProduit.php?id='.$product['id']; ?>" class="btn btn-info">Modifier</a>
-            <a href="" onclick="return confirm('Etes-vous sûr?')" class="btn btn-danger">Supprimer</a>
+            <a href="?a=d&id=<?=    $product['id']; ?>" onclick="return confirm('Etes-vous sûr?')" class="btn btn-danger">Supprimer</a>
         </td>
     </tr>
     <?php
